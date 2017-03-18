@@ -1,6 +1,7 @@
 import sys
 import fileinput
 from enterprise import Enterprise
+from question import Question
 
 #read the input arguments and remove argument in index 0 of the list
 list = sys.argv

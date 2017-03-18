@@ -1,5 +1,5 @@
 class Enterprise:
-	'Common base class for all enterprises'
+	"""Common base class for all enterprises"""
 
 	list_of_questions = []
 	enterprise_name = ""
