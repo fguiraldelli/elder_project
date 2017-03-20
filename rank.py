@@ -118,13 +118,13 @@ def read_files_from_input(list_of_files, list_of_enterprises):
             survey, count_invalid, count_line))
     return count_enterprise, list_of_enterprises
 
-#read the input arguments and remove argument in index 0 of the list
-list_of_enterprises, list_of_files = create_file_list(sys.argv)
-#read each file and fill data in enterprises classes
-count_enterprise, list_of_enterprises = read_files_from_input(list_of_files,
- list_of_enterprises)
-#Display the data statistics and summary
-display_summary_by_companies(count_enterprise, list_of_enterprises)
-display_favoral_answers(count_enterprise, list_of_enterprises)
-display_valid_answers(count_enterprise, list_of_enterprises)
-display_invalid_answers(count_enterprise, list_of_enterprises)
+# #read the input arguments and remove argument in index 0 of the list
+# list_of_enterprises, list_of_files = create_file_list(sys.argv)
+# #read each file and fill data in enterprises classes
+# count_enterprise, list_of_enterprises = read_files_from_input(list_of_files,
+#  list_of_enterprises)
+# #Display the data statistics and summary
+# display_summary_by_companies(count_enterprise, list_of_enterprises)
+# display_favoral_answers(count_enterprise, list_of_enterprises)
+# display_valid_answers(count_enterprise, list_of_enterprises)
+# display_invalid_answers(count_enterprise, list_of_enterprises)
