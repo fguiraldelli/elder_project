@@ -7,12 +7,26 @@ class Enterprise:
         self.enterprise_name = name
         self.valid_num = valid_num
         self.invalid_num = invalid_num
-        self.survey = OrderedDict(sorted(survey.items()))
+        self.survey = survey
+        #self.survey = OrderedDict(sorted(survey.items()))
         Enterprise.countEnterprise += 1
 
-    def calculate_percentage(self):
-        for k, v in self.survey.items():
-            print(v)
+    def display_summary(self):
+        print(self.enterprise_name)
+        d_descending = OrderedDict(sorted(self.survey.items(), 
+            key=lambda k: k[1]['fav'], reverse=True))
+        for k, v in d_descending.items():
+            sum = v['fav'] + v['neutral'] + v['unfav']
+            print('{}: {:.1%} fav, {:.1%} neutral, {:.1%} unfav'
+                .format(k, v['fav']/sum, v['neutral']/sum, 
+                    v['unfav']/sum))
+        print('\n')
+
+    def get_valid_answer(self):
+        return self.enterprise_name, self.valid_num
+
+    def get_invalid_answer(self):
+        return self.enterprise_name, self.invalid_num
 
     def displayValidNumbers(self):
         print ("The valid pool's number is: {}\n".format(self.fav_num

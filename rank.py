@@ -32,9 +32,34 @@ def filled_class(enterprise_name, survey, invalid_num, count_line):
     new_class = Enterprise(enterprise_name, valid_num, invalid_num, survey)
     return new_class
 
-def print_raw_data(count_enterprise, list_of_enterprises):
+def sort_list(list_to_sort):
+    return sorted(list_to_sort, key=lambda k: k[0])
+
+def display_raw_data(count_enterprise, list_of_enterprises):
     for i in range(count_enterprise):
         list_of_enterprises[i].displayStatistics()
+
+def display_summary_by_companies(count_enterprise, list_of_enterprises):
+    for i in range(count_enterprise):
+        list_of_enterprises[i].display_summary()
+
+def display_valid_answers(count_enterprise, list_of_enterprises):
+    print('Valid answers:\n')
+    valid_num_list = []
+    for i in range(count_enterprise):
+        valid_num_list.append(list_of_enterprises[i].get_valid_answer())
+    for enterprise, valid_num in sort_list(valid_num_list):
+        print('{}: {}'.format(enterprise, valid_num))
+    print('\n')
+
+def display_invalid_answers(count_enterprise, list_of_enterprises):
+    print('Invalid answers:\n')
+    invalid_num_list = []
+    for i in range(count_enterprise):
+        invalid_num_list.append(list_of_enterprises[i].get_invalid_answer())
+    for enterprise, invalid_num in sort_list(invalid_num_list):
+        print('{}: {}'.format(enterprise, invalid_num))
+    print('\n')
 
 def read_files_from_input(list_of_files, list_of_enterprises):
     """Function that reads each file and store the data in a class 
@@ -67,7 +92,11 @@ def read_files_from_input(list_of_files, list_of_enterprises):
             count_line += 1
         list_of_enterprises.append(filled_class(enterprise_name,
             survey, count_invalid, count_line))
-        print_raw_data(count_enterprise, list_of_enterprises)
+        #Priting Test
+        #display_raw_data(count_enterprise, list_of_enterprises)
+        display_summary_by_companies(count_enterprise, list_of_enterprises)
+        display_valid_answers(count_enterprise, list_of_enterprises)
+        display_invalid_answers(count_enterprise, list_of_enterprises)
 
 #read the input arguments and remove argument in index 0 of the list
 list_of_enterprises, list_of_files = create_file_list(sys.argv)
