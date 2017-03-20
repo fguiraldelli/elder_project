@@ -7,11 +7,12 @@ class Enterprise:
         self.enterprise_name = name
         self.valid_num = valid_num
         self.invalid_num = invalid_num
-        self.survey = survey
+        self.survey = OrderedDict(sorted(survey.items()))
         Enterprise.countEnterprise += 1
 
-    def sort_survey():
-        return OrderedDict(sorted(survey.items()))
+    def calculate_percentage(self):
+        for k, v in self.survey.items():
+            print(v)
 
     def displayVariables(self):
         print ( "{}\n" 
