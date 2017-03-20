@@ -4,12 +4,12 @@ from enterprise import Enterprise
 from question import Question
 from collections import OrderedDict
 
-def create_file_list(list):
+def create_file_list(list_of_files):
     """ Function that reads the inputed arguments and returns a two lists: 
     files and enterprises"""
-    list.remove(list[0])
+    list_of_files.remove(list_of_files[0])
     list_of_enterprises = []
-    return list_of_enterprises, list
+    return list_of_enterprises, list_of_files
 
 def count_answer_type(dict_type_question, answer):
     """Function that counts the correct answer and imcrements it"""
@@ -48,7 +48,7 @@ def display_summary_by_companies(count_enterprise, list_of_enterprises):
         list_of_enterprises[i].display_summary()
 
 def display_favoral_answers(count_enterprise, list_of_enterprises):
-    print('Fav answers by questions:\n')
+    print('Fav answers by questions:')
     fav_list = []
     fav_dict = {}
     question_id = list_of_enterprises[count_enterprise-1].get_ids_from_survey()
