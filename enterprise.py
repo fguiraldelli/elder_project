@@ -17,7 +17,7 @@ class Enterprise:
             key=lambda k: k[1]['fav'], reverse=True))
         for k, v in d_descending.items():
             sum = v['fav'] + v['neutral'] + v['unfav']
-            print('{}: {:.1%} fav, {:.1%} neutral, {:.1%} unfav'
+            print('{}: {:.0%} fav, {:.0%} neutral, {:.0%} unfav'
                 .format(k, v['fav']/sum, v['neutral']/sum, 
                     v['unfav']/sum))
         print('\n')
