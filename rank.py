@@ -2,6 +2,7 @@ import sys
 import fileinput
 from enterprise import Enterprise
 from question import Question
+from collections import OrderedDict
 
 def create_file_list(list):
     """ Function that reads the inputed arguments and returns a two lists: 
@@ -35,6 +36,9 @@ def filled_class(enterprise_name, survey, invalid_num, count_line):
 def sort_list(list_to_sort):
     return sorted(list_to_sort, key=lambda k: k[0])
 
+def sort_descending_fav_list(list_to_sort):
+    return sorted(list_to_sort, key=lambda k: k[1], reverse=True)
+
 def display_raw_data(count_enterprise, list_of_enterprises):
     for i in range(count_enterprise):
         list_of_enterprises[i].displayStatistics()
@@ -42,6 +46,26 @@ def display_raw_data(count_enterprise, list_of_enterprises):
 def display_summary_by_companies(count_enterprise, list_of_enterprises):
     for i in range(count_enterprise):
         list_of_enterprises[i].display_summary()
+
+def display_favoral_answers(count_enterprise, list_of_enterprises):
+    print('Fav answers by questions:\n')
+    fav_list = []
+    fav_dict = {}
+    question_id = list_of_enterprises[count_enterprise-1].get_ids_from_survey()
+    for i in question_id:
+        fav_list = []
+        for j in range(count_enterprise):
+            fav_list.append(list_of_enterprises[j].get_fav_answer_by_id(i))
+        fav_dict[i] = sort_descending_fav_list(fav_list)
+    fav_dict = OrderedDict(sorted(fav_dict.items()))
+    # Display question id and enterprise percentage
+    for k,v in fav_dict.items():
+        print('\n{}: '.format(k), end='')
+        for i in range(count_enterprise-1):
+            print('{} {}% fav, '.format(v[i][0], v[i][1]), end='')
+        i = count_enterprise-1
+        print('{} {}% fav '.format(v[i][0], v[i][1]), end='')
+    print('\n')
 
 def display_valid_answers(count_enterprise, list_of_enterprises):
     print('Valid answers:\n')
@@ -92,12 +116,15 @@ def read_files_from_input(list_of_files, list_of_enterprises):
             count_line += 1
         list_of_enterprises.append(filled_class(enterprise_name,
             survey, count_invalid, count_line))
-        #Priting Test
-        #display_raw_data(count_enterprise, list_of_enterprises)
-        display_summary_by_companies(count_enterprise, list_of_enterprises)
-        display_valid_answers(count_enterprise, list_of_enterprises)
-        display_invalid_answers(count_enterprise, list_of_enterprises)
+    return count_enterprise, list_of_enterprises
 
 #read the input arguments and remove argument in index 0 of the list
 list_of_enterprises, list_of_files = create_file_list(sys.argv)
-read_files_from_input(list_of_files, list_of_enterprises)
+#read each file and fill data in enterprises classes
+count_enterprise, list_of_enterprises = read_files_from_input(list_of_files,
+ list_of_enterprises)
+#Display the data statistics and summary
+display_summary_by_companies(count_enterprise, list_of_enterprises)
+display_favoral_answers(count_enterprise, list_of_enterprises)
+display_valid_answers(count_enterprise, list_of_enterprises)
+display_invalid_answers(count_enterprise, list_of_enterprises)
