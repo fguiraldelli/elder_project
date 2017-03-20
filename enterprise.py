@@ -14,15 +14,6 @@ class Enterprise:
         for k, v in self.survey.items():
             print(v)
 
-    def displayVariables(self):
-        print ( "{}\n" 
-                "Favoral checks:    {}\n" 
-                "Unfavoral checks:  {}\n" 
-                "Neutral checks:    {}\n" 
-                "Invalid checks:    {}\n"
-                .format(self.enterprise_name, self.fav_num, self.unfav_num,
-                        self.neutral_num, self.invalid_num))
-
     def displayValidNumbers(self):
         print ("The valid pool's number is: {}\n".format(self.fav_num
             +self.neutral_num+self.unfav_num))
