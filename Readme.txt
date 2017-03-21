@@ -1,4 +1,4 @@
-Document to explain the composition of zip file and how to build and run the program:
+This document explains the composition of zip file and how to build and run the program:
 
 The zip file rank.zip is composed of the following files:
 
