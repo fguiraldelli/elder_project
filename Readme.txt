@@ -8,6 +8,8 @@ The zip file rank.zip is composed of the following files:
 - enterprise.py - this file is the class Enterprise, this class stores the values nedeed for counting and calculatingof values to show summary, favorable answers, valid and invalid answers;
 - unittest_input_output.py - this file make some unit tests in input_output.py file;
 - unittest_enterprise.py - this file run some unit tests in class Enterprise;
+- problem_description - this file describes the problem to solve;
+-iput_file folder that contains the input files to use in the program.
 
 DEVELOPER AND RUNNING ENVIRONMENTS
 
