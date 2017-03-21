@@ -1,47 +1,38 @@
 import unittest
 import enterprise
 
-class TestInputOutputMethods(unittest.TestCase):
+class TestEnterpriseClass(unittest.TestCase):
 
-    def test_create_file_list(self):
-        input_list = []
-        for i in range(3):
-            input_list.append('input'+str(i))
-        input_list.remove(input_list[0])
-        list_of_enterprises, list_of_files = \
-        input_output.create_file_list(input_list)
-        self.assertEqual(list_of_files, input_list)
-        self.assertEqual(list_of_enterprises, [])
+    def setUp(self):
+        survey = {4568: {'fav': 2, 'neutral': 0, 'unfav': 1}, 4569: 
+        {'fav': 0, 'neutral': 1, 'unfav': 0}, 4570: {'fav': 1, 'neutral': 0,
+         'unfav': 1}, 4571: {'fav': 1, 'neutral': 0, 'unfav': 1}, 4567: 
+         {'fav': 0, 'neutral': 1, 'unfav': 0}}
 
-    def test_init_question(self):
-        #Testing favorable answer
-        dict_res = input_output.init_question(0)
-        self.assertGreater(dict_res['fav'], 0)
-        dict_res = input_output.init_question(1)
-        self.assertGreater(dict_res['fav'], 0)
-        #Testing neutral answer
-        dict_res = input_output.init_question(2)
-        self.assertGreater(dict_res['neutral'], 0)
-        #Testing unfavorable answer
-        dict_res = input_output.init_question(3)
-        self.assertGreater(dict_res['unfav'], 0)
-        dict_res = input_output.init_question(4)
-        self.assertGreater(dict_res['unfav'], 0)
+        self.company = enterprise.Enterprise('TestCompany', 9, 1, survey)
 
-    def test_count_answer_type(self):
-        dict_type_question ={'fav':0, 'neutral':0, 'unfav':0}
-        #Testing favorable answer
-        dict_res = input_output.count_answer_type(dict_type_question, 1)
-        dict_res = input_output.count_answer_type(dict_res, 0)
-        self.assertGreater(dict_res['fav'], 1)
-        #Testing neutral answer
-        dict_res = input_output.count_answer_type(dict_res, 2)
-        dict_res = input_output.count_answer_type(dict_res, 2)
-        self.assertGreater(dict_res['neutral'], 1)
-        #Testing unfavorable answer
-        dict_res = input_output.count_answer_type(dict_res, 3)
-        dict_res = input_output.count_answer_type(dict_res, 4)
-        self.assertGreater(dict_res['unfav'], 1)
+    def test_get_valid_answer(self):
+        valid_answer = self.company.get_valid_answer()
+        self.assertEqual(valid_answer[1], 9)
+
+    def test_get_invalid_answer(self):
+        invalid_answer = self.company.get_invalid_answer()
+        self.assertEqual(invalid_answer[1], 1)
+
+    def test_get_ids_from_survey(self):
+        list_expected = [4568, 4569, 4570, 4571, 4567]
+        ids = self.company.get_ids_from_survey()
+        self.assertListEqual(ids, list_expected)
+
+    def test_get_fav_answer_by_id(self):
+        list_expected = [('TestCompany', 66), ('TestCompany', 0), 
+        ('TestCompany', 50), ('TestCompany', 50), ('TestCompany', 0)]
+        ids_list = [4568, 4569, 4570, 4571, 4567]
+        result_list = []
+        for i in ids_list:
+            result_list.append(self.company.get_fav_answer_by_id(i))
+        self.assertListEqual(result_list, list_expected)
+
 
 if __name__ == '__main__':
     unittest.main()

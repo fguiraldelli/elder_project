@@ -104,7 +104,7 @@ def read_files_from_input(list_of_files, list_of_enterprises):
                     list_of_enterprises.append(filled_class(enterprise_name,
                         survey, count_invalid, count_line))
                 survey = {}
-                count_line = 0
+                count_line = -1
                 count_invalid = 0
                 enterprise_name = line
                 count_enterprise += 1 
