@@ -1,6 +1,5 @@
 import fileinput
 from enterprise import Enterprise
-from question import Question
 from collections import OrderedDict
 
 def create_file_list(list_of_files):
@@ -27,27 +26,30 @@ def init_question(answer):
     return count_answer_type(dict_type_question, answer)
 
 def filled_class(enterprise_name, survey, invalid_num, count_line):
-    """Function that store raw data in each class"""
+    """Function that stores raw data in each class"""
     valid_num = count_line - invalid_num
     new_class = Enterprise(enterprise_name, valid_num, invalid_num, survey)
     return new_class
 
 def sort_list(list_to_sort):
+    """Function that sorts list in ascending order"""
     return sorted(list_to_sort, key=lambda k: k[0])
 
 def sort_descending_fav_list(list_to_sort):
+    """Function that sorts list in descending order"""
     return sorted(list_to_sort, key=lambda k: k[1], reverse=True)
 
-def display_raw_data(count_enterprise, list_of_enterprises):
-    for i in range(count_enterprise):
-        list_of_enterprises[i].displayStatistics()
-
 def display_summary_by_companies(count_enterprise, list_of_enterprises):
+    """Function that displays the summary for all companies in 
+    descending order of favorable answer by percentage"""
     print('\nSummary by companies:\n')
     for i in range(count_enterprise):
         list_of_enterprises[i].display_summary()
 
 def display_favorable_answers(count_enterprise, list_of_enterprises):
+    """Function that displays the favorable answer ordered by id and 
+    the companies ordered in descending order of favorable asnwer by 
+    percentage"""
     print('Fav answers by questions:')
     fav_list = []
     fav_dict = {}
@@ -68,6 +70,7 @@ def display_favorable_answers(count_enterprise, list_of_enterprises):
     print('\n')
 
 def display_valid_answers(count_enterprise, list_of_enterprises):
+    """Function that displays valid answers in alphabetic order"""
     print('Valid answers:\n')
     valid_num_list = []
     for i in range(count_enterprise):
@@ -77,6 +80,7 @@ def display_valid_answers(count_enterprise, list_of_enterprises):
     print('\n')
 
 def display_invalid_answers(count_enterprise, list_of_enterprises):
+    """Function that displays invalid answers in alphabetic order"""
     print('Invalid answers:\n')
     invalid_num_list = []
     for i in range(count_enterprise):
